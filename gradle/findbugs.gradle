@@ -1,0 +1,51 @@
+apply plugin: 'findbugs'
+
+findbugs {
+    ignoreFailures = false
+    excludeFilter = file("$buildDir/findbugs/excludeFilter.xml")
+}
+
+
+// Task definitions
+task findbugsFilters()
+
+
+// Task configuration
+def taskGroupName = "findbugs"
+findbugsMain    { group = taskGroupName }
+findbugsTest    { group = taskGroupName }
+findbugsFilters { group = taskGroupName
+    ext.packageName = 'org.mycompany'
+}
+
+
+// Task implementations
+findbugsFilters.doLast {
+    // Null check
+    [ findbugsFilters.packageName, findbugs.excludeFilter ].forEach {
+        assert Objects.nonNull(it)
+    }
+
+    def excludeFilter = findbugs.excludeFilter
+
+    if (excludeFilter.exists())
+        return
+
+    def folder = excludeFilter.getParentFile()
+    if (!folder.exists() || !folder.isDirectory())
+        assert folder.mkdirs()
+
+    excludeFilter.text = [
+            '<FindBugsFilter>',
+            '  <Not>',
+            '    <Match>',
+            "      <Class name=\"$findbugsFilters.packageName\" />",
+            '    </Match>',
+            '  </Not>',
+            '</FindBugsFilter>'
+    ].join('\n')
+}
+
+[ findbugsMain, findbugsTest ].each {
+    it.dependsOn findbugsFilters
+}

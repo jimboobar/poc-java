@@ -1,0 +1,17 @@
+apply plugin:'java'
+
+def javaVersion = 1.8
+
+compileJava {
+    sourceCompatibility = javaVersion
+    targetCompatibility = javaVersion
+}
+
+compileTestJava {
+    sourceCompatibility = javaVersion
+    targetCompatibility = javaVersion
+}
+
+
+apply from: "$gradleScriptDir/findbugs.gradle"
+apply from: "$gradleScriptDir/jacoco.gradle"

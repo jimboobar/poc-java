@@ -1,0 +1,15 @@
+ext.library = [:]
+def versions = [:]
+
+versions.jersey = '2.25'
+library.jersey_common = "org.glassfish.jersey.core:jersey-common:${versions.jersey}"
+library.jersey_client = "org.glassfish.jersey.core:jersey-client:${versions.jersey}"
+library.jersey_server = "org.glassfish.jersey.core:jersey-server:${versions.jersey}"
+library.jersey_servlet = "org.glassfish.jersey.containers:jersey-container-servlet:${versions.jersey}"
+library.jersey_servlet_grizzly = "org.glassfish.jersey.containers:jersey-container-grizzly2-servlet:${versions.jersey}"
+library.jersey_server_grizzly = "org.glassfish.jersey.containers:jersey-container-grizzly2-http:${versions.jersey}"
+library.jersey_server_jdk = "org.glassfish.jersey.containers:jersey-container-jdk-http:${versions.jersey}"
+
+
+library.jackson = 'com.fasterxml.jackson.core:jackson-databind:+'
+library.junit = 'junit:junit:4.12'

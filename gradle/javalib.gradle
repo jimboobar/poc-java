@@ -1,0 +1,44 @@
+apply from: "${gradleScriptDir}/java.gradle"
+apply plugin: 'maven-publish'
+
+jar.archiveName = "${rootProject.name}-${project.name}.${jar.extension}"
+
+
+task sourceJar(type: Jar) {
+    baseName = "${rootProject.name}-${project.name}"
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+task testJar(type: Jar) {
+    baseName = "${rootProject.name}-${project.name}"
+    classifier = 'tests'
+    from sourceSets.test.output
+    from sourceSets.test.allSource
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    baseName = "${rootProject.name}-${project.name}"
+	classifier = 'javadoc'
+	from javadoc.destinationDir
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            artifactId "${rootProject.name}-${archivesBaseName}"
+            from components.java
+            artifact sourceJar
+            artifact testJar
+        }
+    }
+    repositories {
+        maven {
+            url = "${publishContextUrl}"
+            credentials {
+                username = "${publishUser}"
+                password = "${publishPassword}"
+            }
+        }
+    }
+}
