@@ -1,4 +1,4 @@
-package javapoc.httpserverwrapper;
+package javapoc.http.server.jersey.jdk;
 
 import org.glassfish.jersey.client.ClientProperties;
 import org.glassfish.jersey.server.ResourceConfig;
@@ -12,6 +12,7 @@ import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import java.io.IOException;
 import java.net.URI;
+import java.util.Collections;
 
 import static org.junit.Assert.assertEquals;
 
@@ -37,9 +38,9 @@ public class HttpServerJerseyJdkTest {
     }
 
     @Test
-    public void testWater() throws IOException {
+    public void shouldBeTree() throws IOException {
         try (HttpServerJerseyJdk server = new HttpServerJerseyJdk(URI.create("http://localhost:6789"))
-                .register("/tree", new ResourceConfig(TreeResource.class))) {
+                .map("/tree", new ResourceConfig(TreeResource.class)).noConfiguration()) {
             System.out.println(server.toString());
             server.start();
             assertEquals("Tree!", client.target(server.getURI())
@@ -50,9 +51,11 @@ public class HttpServerJerseyJdkTest {
     }
 
     @Test
-    public void testDeeperWater() throws IOException {
+    public void shouldBeTreeBranch() throws IOException {
         try (HttpServerJerseyJdk server = new HttpServerJerseyJdk(URI.create("http://localhost:6789"))
-                .register("/tree", new ResourceConfig(TreeBranchResource.class))) {
+                .map(new ResourceConfig(TreeBranchResource.class))
+                .to("/tree")
+                .with(Collections.emptyMap())) {
             System.out.println(server.toString());
             server.start();
             assertEquals("Tree branch!", client.target(server.getURI())
