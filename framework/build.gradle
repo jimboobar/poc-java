@@ -1,0 +1,5 @@
+apply from:"$gradleScriptDir/java.gradle"
+
+dependencies {
+    testCompile library.junit
+}

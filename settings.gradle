@@ -1,4 +1,6 @@
 rootProject.name = 'poc-java'
 
+include ':framework'
+
 include ':servers:http:jersey-grizzly',
         ':servers:http:jersey-jdk'
