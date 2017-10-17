@@ -13,4 +13,5 @@ library.jersey_server_grizzly = "org.glassfish.jersey.containers:jersey-containe
 library.jersey_server_jdk = "org.glassfish.jersey.containers:jersey-container-jdk-http:${versions.jersey}"
 
 
+library.jackson_databind = 'com.fasterxml.jackson.core:jackson-databind:+'
 library.junit = 'junit:junit:4.12'
