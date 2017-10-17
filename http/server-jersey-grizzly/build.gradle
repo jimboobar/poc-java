@@ -1,9 +1,0 @@
-apply from:"$gradleScriptDir/java.gradle"
-
-dependencies {
-    compile library.jersey_server_grizzly
-    compile library.jersey_server
-    compile library.jersey_common
-
-    testCompile library.junit
-}
