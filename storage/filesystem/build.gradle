@@ -1,0 +1,8 @@
+apply from:"$gradleScriptDir/java.gradle"
+
+dependencies {
+    compile library.local_framework
+
+    testCompile library.local_json_coder
+    testCompile library.junit
+}

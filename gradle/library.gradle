@@ -2,6 +2,7 @@ ext.library = [:]
 def versions = [:]
 
 library.local_framework = project(':framework')
+library.local_json_coder = project(':coders:json-coder')
 
 versions.jersey = '2.25'
 library.jersey_common = "org.glassfish.jersey.core:jersey-common:${versions.jersey}"
@@ -13,5 +14,5 @@ library.jersey_server_grizzly = "org.glassfish.jersey.containers:jersey-containe
 library.jersey_server_jdk = "org.glassfish.jersey.containers:jersey-container-jdk-http:${versions.jersey}"
 
 
-library.jackson_databind = 'com.fasterxml.jackson.core:jackson-databind:+'
+library.jackson_databind = 'com.fasterxml.jackson.core:jackson-databind:2.9.2'
 library.junit = 'junit:junit:4.12'

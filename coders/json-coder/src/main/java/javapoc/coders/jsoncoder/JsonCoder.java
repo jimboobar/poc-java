@@ -25,7 +25,15 @@ public class JsonCoder<T> implements Coder<T> {
     private final Class<T> coderClass;
 
 
-    public JsonCoder(ObjectMapper mapper, Class<T> coderClass) {
+    /**
+     * Constructor to create a {@link JsonCoder}.
+     *
+     * @param mapper used for encoding/decoding.
+     * @param coderClass to encode from or decode to.
+     *
+     * @throws CoderException on error.
+     */
+    public JsonCoder(ObjectMapper mapper, Class<T> coderClass) throws CoderException {
         if (coderClass == null)
             throw new CoderException("Missing <coderClass>");
 
@@ -34,13 +42,20 @@ public class JsonCoder<T> implements Coder<T> {
     }
 
 
-    public JsonCoder(Class<T> coderClass) {
+    /**
+     * Constructor to create a {@link JsonCoder}.
+     *
+     * @param coderClass to encode from or decode to.
+     *
+     * @throws CoderException
+     */
+    public JsonCoder(Class<T> coderClass) throws CoderException {
         this(DEFAULT_MAPPER, coderClass);
     }
 
 
     @Override
-    public Class<T> getCoderClass() {
+    public Class<T> getClassType() {
         return coderClass;
     }
 

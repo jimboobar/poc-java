@@ -6,3 +6,5 @@ include ':coders:json-coder'
 
 include ':servers:http:jersey-grizzly',
         ':servers:http:jersey-jdk'
+
+include ':storage:filesystem'

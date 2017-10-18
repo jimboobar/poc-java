@@ -7,11 +7,11 @@ public interface Coder<T> extends Encoder<OutputStream, T>, Decoder<InputStream,
 
 
     /**
-     * Method returning the class type for coder.
+     * Method returning the class type.
      *
      * @return the class type
      */
-    Class<T> getCoderClass();
+    Class<T> getClassType();
 
 
     /**
